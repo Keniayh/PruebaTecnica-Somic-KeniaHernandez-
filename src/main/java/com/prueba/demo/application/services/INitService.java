@@ -16,4 +16,6 @@ public interface INitService {
     Optional<Nit> findById(int nitCod);
 
     Optional<Nit> update(int nitCod, Nit nit);
+
+    Optional<Nit> delete(int nitCod);
 }

@@ -53,4 +53,14 @@ public class NitImpl implements INitService{
         return Optional.empty();
     }
 
+    @Transactional
+    @Override
+    public Optional<Nit> delete(int nitCod) {
+        Optional<Nit> nitOptional = nitRepository.findById(nitCod);
+        nitOptional.ifPresent(nitDb -> {
+            nitRepository.delete(nitDb);
+        });
+        return nitOptional;
+    }
+
 }
