@@ -18,8 +18,6 @@ import com.prueba.demo.domain.entities.Nit;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
 @RestController
 @RequestMapping("/nits")
 public class NitController {
@@ -41,16 +39,17 @@ public class NitController {
         Optional<Nit> nitOptional = nitService.findById(nitCod);
         return nitOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-    
+
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable int nitCod, @RequestBody Nit nit) {
         Optional<Nit> updateOptional = nitService.update(nitCod, nit);
         return updateOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{nitCod}")
     public ResponseEntity<?> delete(@PathVariable int nitCod) {
         Optional<Nit> nitDelete = nitService.delete(nitCod);
         return nitDelete.map(c -> ResponseEntity.ok().build()).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
 }

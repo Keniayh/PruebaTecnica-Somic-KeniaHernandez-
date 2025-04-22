@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
 import com.prueba.demo.domain.entities.Factura;
 
 @Service
@@ -16,4 +15,6 @@ public interface IFacturaService {
     Optional<Factura> findById(int facCod);
 
     Optional<Factura> update(int facCod, Factura factura);
+
+    Optional<Factura> delete(int facCod);
 }

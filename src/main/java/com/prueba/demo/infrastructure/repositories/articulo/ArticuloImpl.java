@@ -18,7 +18,7 @@ public class ArticuloImpl implements IArticuloService {
     @Transactional(readOnly = true)
     @Override
     public List<Articulo> findAll() {
-        return (List<Articulo>)articuloRepository.findAll();
+        return (List<Articulo>) articuloRepository.findAll();
     }
 
     @Transactional
@@ -37,7 +37,7 @@ public class ArticuloImpl implements IArticuloService {
     @Override
     public Optional<Articulo> update(int artCod, Articulo articulo) {
         Optional<Articulo> artOld = articuloRepository.findById(artCod);
-        if(artOld.isPresent()) {
+        if (artOld.isPresent()) {
             Articulo artDb = artOld.orElseThrow();
             artDb.setArtNom(articulo.getArtNom());
             artDb.setArtLab(articulo.getArtLab());
@@ -50,4 +50,16 @@ public class ArticuloImpl implements IArticuloService {
 
         return Optional.empty();
     }
+
+    @Override
+public Optional<Articulo> delete(int artCod) {
+    Optional<Articulo> artOptional = articuloRepository.findById(artCod);
+    if (artOptional.isPresent()) {
+        articuloRepository.delete(artOptional.get());
+        return artOptional;
+    }
+    return Optional.empty();
+}
+
+
 }

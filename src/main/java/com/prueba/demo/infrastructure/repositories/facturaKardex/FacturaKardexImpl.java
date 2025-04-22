@@ -109,5 +109,14 @@ public class FacturaKardexImpl implements IFacturaKardexService {
                 throw new IllegalArgumentException("No se puede modificar el costo para una devolución.");
             }
         }
-    }    
+    }
+    
+    @Override
+    public Optional<FacturaKardex> delete(int facKCod) {
+        Optional<FacturaKardex> facKOptional = facturaKRepository.findById(facKCod);
+        facKOptional.ifPresent(facKDb -> {
+            facturaKRepository.delete(facKDb);
+        });
+        return facKOptional;
+    }
 }

@@ -53,7 +53,6 @@ public class NitImpl implements INitService{
         return Optional.empty();
     }
 
-    @Transactional
     @Override
     public Optional<Nit> delete(int nitCod) {
         Optional<Nit> nitOptional = nitRepository.findById(nitCod);
@@ -62,5 +61,4 @@ public class NitImpl implements INitService{
         });
         return nitOptional;
     }
-
 }

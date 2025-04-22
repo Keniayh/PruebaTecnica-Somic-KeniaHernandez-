@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
 import com.prueba.demo.domain.entities.Articulo;
 
 @Service
@@ -16,4 +15,6 @@ public interface IArticuloService {
     Optional<Articulo> findById(int artCod);
 
     Optional<Articulo> update(int artCod, Articulo articulo);
+
+    Optional<Articulo> delete(int artCod);
 }

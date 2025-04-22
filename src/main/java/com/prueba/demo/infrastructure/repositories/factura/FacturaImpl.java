@@ -62,4 +62,13 @@ public class FacturaImpl implements IFacturaService {
 
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Factura> delete(int facCod) {
+        Optional<Factura> facOptional = facturaRepository.findById(facCod);
+        facOptional.ifPresent(facDb -> {
+            facturaRepository.delete(facDb);
+        });
+        return facOptional;
+    }
 }
