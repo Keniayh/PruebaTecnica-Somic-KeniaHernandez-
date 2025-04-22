@@ -32,6 +32,10 @@ public class FacturaKardex {
     @Column(name = "FacKUni")
     private int facKUni;
 
+
+    @Column(name = "FacKCtUni")
+    private BigDecimal facKCtUni;
+
     @Column(name = "FacKTtalVt", precision = 10, scale = 2)
     private BigDecimal facKTtalVt;
 
@@ -41,12 +45,13 @@ public class FacturaKardex {
     public FacturaKardex() {
     }
 
-    public FacturaKardex(int facKCod, Factura factura, Articulo articulo, int facKUni, BigDecimal facKTtalVt,
-            BigDecimal facKTtalCost) {
+    public FacturaKardex(int facKCod, Factura factura, Articulo articulo, int facKUni, BigDecimal facKCtUni,
+            BigDecimal facKTtalVt, BigDecimal facKTtalCost) {
         this.facKCod = facKCod;
         this.factura = factura;
         this.articulo = articulo;
         this.facKUni = facKUni;
+        this.facKCtUni = facKCtUni;
         this.facKTtalVt = facKTtalVt;
         this.facKTtalCost = facKTtalCost;
     }
@@ -81,6 +86,14 @@ public class FacturaKardex {
 
     public void setFacKUni(int facKUni) {
         this.facKUni = facKUni;
+    }
+
+    public BigDecimal getFacKCtUni() {
+        return facKCtUni;
+    }
+
+    public void setFacKCtUni(BigDecimal facKCtUni) {
+        this.facKCtUni = facKCtUni;
     }
 
     public BigDecimal getFacKTtalVt() {
