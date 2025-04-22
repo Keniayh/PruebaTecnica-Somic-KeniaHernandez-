@@ -1,6 +1,5 @@
 package com.prueba.demo.infrastructure.repositories.facturaKardex;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,10 +31,8 @@ public class FacturaKardexImpl implements IFacturaKardexService {
     public FacturaKardex save(FacturaKardex facturaKardex) {
         // Validar el saldo del artículo antes de guardar
         validarSaldoArticulo(facturaKardex);
-        validarModificacionCostos(facturaKardex);
         // Actualizar el saldo del artículo según la naturaleza
         actualizarSaldoArticulo(facturaKardex);
-        facturaKardex.calcularTotalesDesdeArticulo();
         // Guardar el FacturaKardex después de la validación
         return facturaKRepository.save(facturaKardex);
     }
@@ -55,10 +52,10 @@ public class FacturaKardexImpl implements IFacturaKardexService {
             facKDb.setArticulo(facturaK.getArticulo());
             facKDb.setFactura(facturaK.getFactura());
             facKDb.setFacKUni(facturaK.getFacKUni());
+            facKDb.setFacKCtUni(facturaK.getFacKCtUni());
             facKDb.setFacKTtalVt(facturaK.getFacKTtalVt());
             facKDb.setFacKTtalCost(facturaK.getFacKTtalCost());
 
-            facKDb.calcularTotalesDesdeArticulo();
             return Optional.of(facturaKRepository.save(facturaK));
         }
 
@@ -97,19 +94,6 @@ public class FacturaKardexImpl implements IFacturaKardexService {
         articuloRepository.save(articulo);
     }
 
-    // Validar que no se modifiquen los costos si la naturaleza es negativa
-    private void validarModificacionCostos(FacturaKardex facturaKardex) {
-        char naturaleza = facturaKardex.getFactura().getFacNatu();
-        if (naturaleza == '-') { // Si es devolución
-            // Aquí no permitimos modificar el costo o precio de venta
-            if (facturaKardex.getFacKTtalVt() != null && facturaKardex.getFacKTtalVt().compareTo(BigDecimal.ZERO) > 0) {
-                throw new IllegalArgumentException("No se puede modificar el precio de venta para una devolución.");
-            }
-            if (facturaKardex.getFacKTtalCost() != null && facturaKardex.getFacKTtalCost().compareTo(BigDecimal.ZERO) > 0) {
-                throw new IllegalArgumentException("No se puede modificar el costo para una devolución.");
-            }
-        }
-    }
     
     @Override
     public Optional<FacturaKardex> delete(int facKCod) {

@@ -2,6 +2,8 @@ package com.prueba.demo.domain.entities;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,7 @@ public class FacturaKardex {
     private int facKCod;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "FacCod", nullable = false)
     private Factura factura;
 
@@ -110,13 +113,6 @@ public class FacturaKardex {
 
     public void setFacKTtalCost(BigDecimal facKTtalCost) {
         this.facKTtalCost = facKTtalCost;
-    }
-
-    public void calcularTotalesDesdeArticulo() {
-        if (articulo != null && facKUni > 0) {
-            this.facKTtalVt = articulo.getArtPreVt().multiply(BigDecimal.valueOf(facKUni));
-            this.facKTtalCost = articulo.getArtCosto().multiply(BigDecimal.valueOf(facKUni));
-        }
     }
     
 }

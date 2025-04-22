@@ -7,8 +7,6 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -20,7 +18,6 @@ import jakarta.persistence.Table;
 public class Factura {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FacCod")
     private int facCod;
 
@@ -123,32 +120,6 @@ public class Factura {
 
     public void setKardex(List<FacturaKardex> kardex) {
         this.kardex = kardex;
-    }
-
-    public void calcularTotales() {
-        BigDecimal totalVenta = BigDecimal.ZERO;
-        BigDecimal totalCosto = BigDecimal.ZERO;
-    
-        // Iterar sobre FacturaKardex
-        for (FacturaKardex kardex : this.kardex) {
-            if (kardex.getFacKTtalVt() != null) {
-                totalVenta = totalVenta.add(kardex.getFacKTtalVt());
-            }
-            if (kardex.getFacKTtalCost() != null) {
-                totalCosto = totalCosto.add(kardex.getFacKTtalCost());
-            }
-        }
-    
-        // Asignar los totales calculados
-        this.facTtalVt = totalVenta;
-        this.facTtalCost = totalCosto;
-    }
-    
-    public void calcularFechaVencimiento() {
-        if (this.facFecha != null && this.nit != null) {
-            // Sumamos los días de plazo a la fecha de la factura
-            this.facVenc = this.facFecha.plusDays(nit.getNitPlazo());
-        }
     }
 }
 

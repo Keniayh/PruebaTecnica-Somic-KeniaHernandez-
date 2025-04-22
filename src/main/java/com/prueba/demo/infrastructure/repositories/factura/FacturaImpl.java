@@ -25,11 +25,6 @@ public class FacturaImpl implements IFacturaService {
     @Transactional
     @Override
     public Factura save(Factura factura) {
-        // Llamar a los métodos para calcular los totales y la fecha de vencimiento antes de guardar la factura
-        factura.calcularTotales(); // Calcula los totales
-        factura.calcularFechaVencimiento(); // Calcula la fecha de vencimiento
-
-        // Guardar la factura después de calcular
         return facturaRepository.save(factura);
     }
 
@@ -52,10 +47,6 @@ public class FacturaImpl implements IFacturaService {
             facDb.setFacTtalVt(factura.getFacTtalVt());
             facDb.setKardex(factura.getKardex());
             facDb.setNit(factura.getNit());
-
-            // Llamar a los métodos para recalcular los totales y la fecha de vencimiento al actualizar la factura
-            facDb.calcularTotales();
-            facDb.calcularFechaVencimiento();
 
             return Optional.of(facturaRepository.save(facDb));
         }
