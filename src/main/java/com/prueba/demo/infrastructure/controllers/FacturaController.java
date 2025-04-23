@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.prueba.demo.application.services.IFacturaService;
 import com.prueba.demo.domain.entities.Factura;
-import com.prueba.demo.domain.entities.Nit;
 
 @RestController
 @RequestMapping("/facturas")
@@ -31,7 +30,7 @@ public class FacturaController {
         return facturaService.findAll();
     }
 
-
+    
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Factura factura) {
         Factura savedFactura = facturaService.save(factura);

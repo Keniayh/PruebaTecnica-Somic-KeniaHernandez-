@@ -40,8 +40,8 @@ public class NitController {
         return nitOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable int nitCod, @RequestBody Nit nit) {
+    @PutMapping("/{nitCod}")
+    public ResponseEntity<?> update(@PathVariable("nitCod") int nitCod, @RequestBody Nit nit) {
         Optional<Nit> updateOptional = nitService.update(nitCod, nit);
         return updateOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
