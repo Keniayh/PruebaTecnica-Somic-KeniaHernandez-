@@ -40,7 +40,7 @@ public class ArticuloController {
         return artOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{artCod}")
     public ResponseEntity<?> update(@PathVariable int artCod, @RequestBody Articulo articulo) {
         Optional<Articulo> updateOptional = articuloService.update(artCod, articulo);
         return updateOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());

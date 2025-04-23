@@ -35,7 +35,7 @@ public class FacturaKardexController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedFacturaKardex);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{facKCod}")
     public ResponseEntity<?> view(@PathVariable int facKCod) {
         Optional<FacturaKardex> facturaKardexOptional = facturaKardexService.findById(facKCod);
         return facturaKardexOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());

@@ -52,14 +52,13 @@ public class ArticuloImpl implements IArticuloService {
     }
 
     @Override
-public Optional<Articulo> delete(int artCod) {
-    Optional<Articulo> artOptional = articuloRepository.findById(artCod);
-    if (artOptional.isPresent()) {
-        articuloRepository.delete(artOptional.get());
-        return artOptional;
+    public Optional<Articulo> delete(int artCod) {
+        Optional<Articulo> artOptional = articuloRepository.findById(artCod);
+        if (artOptional.isPresent()) {
+            articuloRepository.delete(artOptional.get());
+            return artOptional;
+        }
+        return Optional.empty();
     }
-    return Optional.empty();
-}
-
 
 }

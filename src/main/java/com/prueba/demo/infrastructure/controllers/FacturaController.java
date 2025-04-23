@@ -37,7 +37,7 @@ public class FacturaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedFactura);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{facCod}")
     public ResponseEntity<?> view(@PathVariable int facCod) {
         Optional<Factura> facturaOptional = facturaService.findById(facCod);
         return facturaOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
